@@ -1,6 +1,6 @@
 /*
  *
- * irrBM (irrlight Benchmark)
+ * irrBM (Irrlicht Benchmark)
  * Copyright (C) 2022 TheMrCerebro
  *
  * This file is part of irrBM.
