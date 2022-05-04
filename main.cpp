@@ -27,10 +27,12 @@
 */
 
 #include <irrlicht.h>
+#include <iostream>
 
 using namespace irr;
 using namespace core;
 using namespace video;
+using namespace std;
 
 #include "FakeGLSL.h"
 
@@ -77,7 +79,7 @@ public:
 	}
 };
 
-int main(int argc, char** argv)
+int main()
 {
     u32 frames = 0;
     u32 curFPS = 0, minFPS = 0, maxFPS = 0;
@@ -88,60 +90,67 @@ int main(int argc, char** argv)
     u32 rWidth[] = { 0, 640, 800, 1024, 1280, 1920, 3840 };
     u32 rHeight[] = { 0, 480, 600, 768, 720, 1080, 2160 };
 
-    printf( "============================\n"
-            "irrBM v1.0 - by TheMrCerebro\n"
-            "============================\n\n" );
+    cout << "               ___   ______    ______    _______  __   __" << endl;
+    cout << "              |   | |    _ |  |    _ |  |  _    ||  |_|  |" << endl;
+    cout << "              |   | |   | ||  |   | ||  | |_|   ||       |" << endl;
+    cout << "              |   | |   |_||_ |   |_||_ |       ||       |" << endl;
+    cout << "              |   | |    __  ||    __  ||  _   | |       |" << endl;
+    cout << "              |   | |   |  | ||   |  | || |_|   || ||_|| |" << endl;
+    cout << "              |___| |___|  |_||___|  |_||_______||_|   |_|" << endl;
+    cout << " (o)================================================================(o)" << endl;
+    cout << "         - MINI-BENCHMARK USING IRRLICHT3D [by TheMrCerebro] -" << endl;
+    cout << " (o)================================================================(o)" << endl;
+    cout << endl;
+    cout << "  This tool has been created for the purpose of comparing how the same" << endl;
+    cout << "  code used for GLSL can be executed in C++. There are some examples" << endl;
+    cout << "        that are very complex and consume a lot of resources." << endl;
+    cout << endl;
 
-    printf( "This tool has been created for the purpose of comparing how the same code\n"
-            "used for GLSL can be executed in C++. There are some examples that are very\n"
-            "complex and consume a lot of resources, use with caution!\n\n" );
-
-	printf( "Driver:\n"
-    "   (1) - CPU\n"
-    "   (2) - GPU\n" );
+	cout << " Driver:" << endl;
+    cout << "   (1) - CPU" << endl;
+    cout << "   (2) - GPU" << endl;
     u32 drv;
-    scanf("%u",&drv);
+    cin >> drv;
 
-	printf( "Resolution:\n"
-    " (1) - 640x480\n"
-    " (2) - 800x600\n"
-    " (3) - 1024x768\n"
-    " (4) - 1280x720 HD\n"
-    " (5) - 1920x1080 Full HD\n"
-    " (6) - 3840x2160 Ultra HD\n" );
+	cout << " Resolution:" << endl;
+    cout << "   (1) - 640x480" << endl;
+    cout << "   (2) - 800x600" << endl;
+    cout << "   (3) - 1024x768" << endl;
+    cout << "   (4) - 1280x720 HD" << endl;
+    cout << "   (5) - 1920x1080 Full HD" << endl;
+    cout << "   (6) - 3840x2160 Ultra HD" << endl;
     u32 resolution;
-    scanf("%u",&resolution);
+    cin >> resolution;
 
-	printf( "Fullscreen:\n"
-    " (y) - Yes\n"
-    " (n) - No\n" );
+	cout << " Fullscreen:" << endl;
+	cout << "   (y) - Yes" << endl;
+	cout << "   (n) - No" << endl;
     c8 fullscreen;
-    scanf("%s",&fullscreen);
+    cin >> fullscreen;
 
-	printf( "VSync:\n"
-    " (y) - Yes\n"
-    " (n) - No\n" );
+	cout << " VSync:" << endl;
+	cout << "   (y) - Yes" << endl;
+	cout << "   (n) - No" << endl;
     c8 vsync;
-    scanf("%s",&vsync);
+    cin >> vsync;
 
-	printf( "Sample:\n"
-	" (0) - Twist\n"
-    " (1) - Tunnel\n"
-    " (2) - Sun\n"
-    " (3) - Mobius\n"
-    " (4) - Spheres\n"
-    " (5) - Synthwave\n"
-    " (6) - Crater\n"
-    " (7) - Psychedelic\n"
-	" (8) - Stars\n"
-	" (9) - Fork\n" );
+	cout << " Sample:" << endl;
+	cout << "   (0) - Twist" << endl;
+    cout << "   (1) - Tunnel" << endl;
+    cout << "   (2) - Sun" << endl;
+    cout << "   (3) - Mobius" << endl;
+    cout << "   (4) - Spheres" << endl;
+    cout << "   (5) - Synthwave" << endl;
+    cout << "   (6) - Crater" << endl;
+    cout << "   (7) - Psychedelic" << endl;
+	cout << "   (8) - Stars" << endl;
+	cout << "   (9) - Fork" << endl;
     u32 opt;
-    scanf("%u",&opt);
+    cin >> opt;
 
 //==================================
 // Irrlicht config
 
-    system("cls");
     MyEventReceiver receiver;
 
     IrrlichtDevice *device = createDevice(drv==1 ? video::EDT_SOFTWARE : video::EDT_OPENGL,
@@ -318,18 +327,17 @@ int main(int argc, char** argv)
         iTime += 0.01f;
     }
 
+    cout << " Driver: " << (drv==1 ? "Software" : "OpenGL") << endl;
+    cout << " Scene: " << sample[opt] << endl;
+    cout << " Resolution: " << sWidth << "x" << sHeight << endl;
+    cout << " Fullscreen: " << (fullscreen=='y' ? "Yes" : "No") << endl;
+    cout << " VSync: " << (vsync=='y' ? "Yes" : "No") << endl;
+    cout << " FPS: Min:" << minFPS << " Max:" << maxFPS << " Avr:" << curFPS << endl;
+    cout << " RAM: Min:" << minRAM << "kB Max:" << maxRAM << "kB Avr:" << curRAM << "kB" << endl;
+
     device->drop();
 
-    printf("\n");
-    printf("DRIVER: %s\n", (drv==1 ? "Software" : "OpenGL"));
-    printf("SCENE: %s\n", sample[opt]);
-    printf("RESOLUTION: %ix%i\n", sWidth, sHeight);
-    printf("FULLSCREEN: %s\n", (fullscreen=='y' ? "Yes" : "No"));
-    printf("VSYNC: %s\n", (vsync=='y' ? "Yes" : "No"));
-    printf("FPS: Min:%i, Max:%i, Avr:%i\n", minFPS, maxFPS, curFPS);
-    printf("RAM: Min:%ikB, Max:%ikB, Avr:%ikB\n", minRAM, maxRAM, curRAM);
-    printf("\n");
-
+    cout << endl;
     system("pause");
     return 0;
 }
